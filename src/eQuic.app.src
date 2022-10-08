@@ -2,7 +2,7 @@
  [{description, "An library of quic"},
   {vsn, "0.1.0"},
   {registered, []},
-  {applications, [kernel, stdlib, eSync]},
+  {applications, [kernel, stdlib]},
   {env,[]},
   {modules, []},
   {licenses, ["MIT"]},
