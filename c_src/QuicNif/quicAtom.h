@@ -11,6 +11,7 @@
     A(ok) \
     A(quic) \
     A(error) \
+    A(true) \
     A(undefined) \
     /* atom of setting */    \
     A(eMaxBytesPerKey) \
@@ -43,9 +44,10 @@
     A(eMigrationEnabled) \
     A(eDatagramReceiveEnabled) \
     A(eServerResumptionLevel) \
-    A(eRESERVED) \
+    A(eGreaseQuicBitEnabled) \
     A(eMaxOperationsPerDrain) \
     A(eMtuDiscoveryMissingProbeCount)\
+    /* Credential */ \
     A(eType) \
     A(eFlags) \
     A(eCertificateHash_ShaHash) \
@@ -61,13 +63,14 @@
     A(eCertificatePkcs12_Asn1BlobLength) \
     A(eCertificatePkcs12_PrivateKeyPassword) \
     A(eCfgRef) \
-    A(eListenerTag) \
-    A(eAcceptWorkers) \
+    A(eAcceptorCnt) \
     A(eAlpn) \
     /* atom of msg tag */ \
     A(quicLStart) \
     A(quicLClose) \
-    A(quicNConn)
+    A(quicCNew) \
+    A(quicCInfo) \
+    A(quicSNew)
 
 NIF_ATOMS(NIF_ATOM_DECL)
 

@@ -12,7 +12,7 @@
 
 -define(LimitExecutionProfile, [0, 1, 2, 3]).
 -define(DefeExecutionProfile, 0).
--define(DefAlpn, "eQuic").
+-define(DefAlpn, ["eQuic"]).
 -define(DefeSettings, #{}).
 -define(DefeCredentialSrv, #{eType => 4, eFlags =>0, eCertificateFile_PrivateKeyFile => "./priv/key.pem", eCertificateFile_CertificateFile => "./priv/cert.pem"}).
 -define(DefeCredentialCli, #{eType => 0, eFlags =>1}).
@@ -57,11 +57,10 @@
    , eMigrationEnabled => uint8()                           %% 使客户端能够迁移 IP 地址和元组。要求服务器位于协作负载均衡器之后，或者没有负载均衡器。 默认值： 1 ( TRUE)
    , eDatagramReceiveEnabled => uint8()                     %% 宣传对 QUIC 数据报扩展的支持。连接的双方都需要将其设置TRUE为DatagramSend才能正常工作并受支持。 默认值： 0 ( FALSE)
    , eServerResumptionLevel => uint8()  %% QUIC_SERVER_RESUMPTION_LEVEL  %% 仅限服务器。控制恢复票证和/或 0-RTT 服务器支持。QUIC_SERVER_RESUME_ONLY启用发送和接收 TLS 恢复票证。服务器应用程序必须调用ConnectionSendResumptionTicket向客户端发送恢复票证。QUIC_SERVER_RESUME_AND_ZERORTT启用发送和接收 TLS 恢复票证并生成 0-RTT 密钥和接收 0-RTT 有效负载。服务器应用程序可以单独决定接受/拒绝每个 0-RTT 有效负载。 默认值：（ QUIC_SERVER_NO_RESUME禁用）
-   , eRESERVED => uint8()
    , eMaxOperationsPerDrain => uint8()                      %% 每个连接量子消耗的最大操作数。 默认值： 16
    , eMtuDiscoveryMissingProbeCount => uint8()              %% 在退出 MTU 探测之前要重试的 MTU 探测次数。 默认值： 3
+   , eGreaseQuicBitEnabled => uint8()
 }.
-
 
 %% typedef enum QUIC_CREDENTIAL_TYPE {
 %%    QUIC_CREDENTIAL_TYPE_NONE,
@@ -181,14 +180,15 @@
 %% quic status see: // https://github.com/microsoft/msquic/blob/main/docs/api/QUIC_STATUS.md
 
 -type quciMsg() ::
-   {quic_accept, Ref :: reference()} |
-   {quic_conn, Ref :: reference()} |
-   {quic_stream, Ref :: reference()} |
-   {quic_data, Ref :: reference()}.
+   {quicLStart, Ref :: reference()} |
+   {quicLClose, Ref :: reference()} |
+   {quicCNew, Ref :: reference()} |
+   {quicCInfo, Type :: atom(), Term :: term()} |
+   {quicSNew, Ref :: reference()}.
 
 -type listenAddr() :: string().
 -type listenPort() :: 0 .. 65536.
--type listenOpts() :: #{eCfgRef => reference(), eAcceptWorkers := list(), eAlpn := [string(), ...]}.
+-type listenOpts() :: #{eCfgRef => reference(), eAcceptorCnt := pos_integer(), eAlpn := [string(), ...]}.
 
 -type connOpts() :: #{}.
 

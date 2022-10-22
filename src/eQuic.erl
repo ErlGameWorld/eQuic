@@ -2,14 +2,29 @@
 
 -include("eQuic.hrl").
 
+-nifs ([
+	paramCfgs/0
+	, listenerStart/1			%% 开始监听
+	, listenerStart/2			%% 开始监听
+	, listenerStart/3       %% 开始监听
+	, listenerAccept/2		%% enable接受
+	, listenerClose/1       %% 关闭监听
+
+	, cfgOpen/3					%% 注册配置 以提供相同配置策略的模块复用
+
+	, connOpen/3            %% 建立连接
+	, connClose/1           %% 关闭连接
+	, test/1
+]).
+
 -on_load(init/0).
 
 -export([
 		paramCfgs/0
 		, listenerStart/1			%% 开始监听
 		, listenerStart/2			%% 开始监听
-		, listenerStart/3        %% 开始监听
-
+		, listenerStart/3       %% 开始监听
+		, listenerAccept/2		%% enable接受
 		, listenerClose/1       %% 关闭监听
 
 		, cfgOpen/3					%% 注册配置 以提供相同配置策略的模块复用
@@ -35,6 +50,7 @@
 %%
 %% 	, getConnId/1
 %% 	, getStreamId/1
+		, test/1
 ]).
 
 nativeCredentialFile(CredentialMap) ->
@@ -58,7 +74,7 @@ init() ->
 	ExecutionProfile = application:get_env(eQuic, eExecutionProfile, ?DefeExecutionProfile),
 	?IF(lists:member(ExecutionProfile, ?LimitExecutionProfile) /= true, throw({error, {eExecutionProfile, ExecutionProfile, ?LimitExecutionProfile}})),
 
-	Alpn = application:get_env(eQuic, alpn, ?DefAlpn),
+	Alpn = application:get_env(eQuic, eAlpn, ?DefAlpn),
 	Settings = application:get_env(eQuic, eSettings, ?DefeSettings),
 	CredentialSrv = application:get_env(eQuic, eCredentialSrv, ?DefeCredentialSrv),
 	CredentialCli = application:get_env(eQuic, eCredentialCli, ?DefeCredentialCli),
@@ -92,6 +108,10 @@ listenerStart(ListenPort, ListenOpts) ->
 
 -spec listenerStart(listenAddr(), listenPort(), listenOpts()) -> {ok, reference()} | {error, term()}.
 listenerStart(_ListenAddr, _ListenPort, _ListenOpts) ->
+	?NOT_LOADED.
+
+-spec listenerAccept(reference(), pos_integer()) -> ok | {error, term()}.
+listenerAccept(_ListenRef, _Id) ->
 	?NOT_LOADED.
 
 -spec listenerClose(reference()) -> ok | {error, term()}.
@@ -192,5 +212,6 @@ connClose(_ConnRef) ->
 %% controlling_process(_H, _P) ->
 %% 	erlang:nif_error(nif_library_not_loaded).
 
-
+test(_Args) ->
+	?NOT_LOADED.
 
