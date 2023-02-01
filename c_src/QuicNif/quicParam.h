@@ -90,4 +90,33 @@ struct ParamCfg_r {
 
 };
 
+
+ERL_NIF_TERM AddrToTerm(ErlNifEnv* MsgEnv, const QUIC_ADDR* addr) {
+	return atom_undefined;
+}
+
+ERL_NIF_TERM StreamsAvailable(ErlNifEnv* MsgEnv, QUIC_CONNECTION_EVENT* Event) {
+	return atom_undefined;
+}
+
+ERL_NIF_TERM IdealProcessorChanged(ErlNifEnv* MsgEnv, QUIC_CONNECTION_EVENT* Event) {
+	return atom_undefined;
+}
+
+ERL_NIF_TERM DatagramStateChanged(ErlNifEnv* MsgEnv, QUIC_CONNECTION_EVENT* Event) {
+	return atom_undefined;
+}
+
+ERL_NIF_TERM DatagramSendStateChanged(ErlNifEnv* MsgEnv, QUIC_CONNECTION_EVENT* Event) {
+	return atom_undefined;
+}
+
+ERL_NIF_TERM ResumptionTicketReceived(ErlNifEnv* MsgEnv, QUIC_CONNECTION_EVENT* Event) {
+	return atom_undefined;
+}
+
+ERL_NIF_TERM PeerCertificateReceived(ErlNifEnv* MsgEnv, QUIC_CONNECTION_EVENT* Event) {
+	return atom_undefined;
+}
+
 #endif

@@ -16,7 +16,7 @@ bool getUint16FormTerm(ErlNifEnv* env, const ERL_NIF_TERM Term, uint16_t* Value)
 
 bool getUint8FromMap(ErlNifEnv* env, const ERL_NIF_TERM Map, ERL_NIF_TERM Key, uint8_t* Value) {
 	ERL_NIF_TERM TValue;
-	if (!enif_get_map_value(env, Map, Key, &TValue))return false;
+	if (!enif_get_map_value(env, Map, Key, &TValue)) return false;
 
 	unsigned TemValue = 0;
 

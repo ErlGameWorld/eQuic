@@ -12,7 +12,9 @@
     A(quic) \
     A(error) \
     A(true) \
+    A(false) \
     A(undefined) \
+    A(freed) \
     /* atom of setting */    \
     A(eMaxBytesPerKey) \
     A(eHandshakeIdleTimeoutMs) \
@@ -66,11 +68,25 @@
     A(eAcceptorCnt) \
     A(eAlpn) \
     /* atom of msg tag */ \
+    A(stopByPeer) \
+    A(stopByTransport) \
     A(quicLStart) \
     A(quicLClose) \
     A(quicCNew) \
     A(quicCInfo) \
-    A(quicSNew)
+    A(quicCStop) \
+    A(quicCClose) \
+    A(quicSNew) \
+    A(localAddrChanged) \
+    A(peerAddrChanged)  \
+    A(streamsAvailable)  \
+    A(peerNeedsStreams) \
+    A(idealProcessorChanged) \
+    A(datagramStateChanged) \
+    A(datagramSendStateChanged) \
+    A(resumptionTicketReceived) \
+    A(peerCertificateReceived) \
+    A(datagamRecv)
 
 NIF_ATOMS(NIF_ATOM_DECL)
 

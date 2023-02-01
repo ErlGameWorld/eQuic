@@ -7,7 +7,9 @@ QUIC_PARAM_CONN_LOCAL_ADDRESS             仅在客户端上设置。必须在�
 
 QUIC_PARAM_CONN_RESUMPTION_TICKET         必须在start之前在客户端上设置。
 
+关闭时close
 
+回调执行的顺序：对于给定的连接，事件回调将在同一个线程上按顺序发生。流事件也在连接的工作线程上处理，所以它们也是按顺序到达的
 
 Linux(centos7)下安装OpenSSL 安装详解
 
@@ -54,16 +56,16 @@ echo "/usr/local/openssl/lib" >> /etc/ld.so.conf
 
 ldconfig -v
 
-ln -sf /usr/local/openssl/lib/libssl.so.81.1.1 /usr/lib64/libssl.so.1.1
-ln -sf /usr/local/openssl/lib/libcrypto.so.81.1.1 /usr/lib64/libcrypto.so.1.1
+ln -sf /usr/local/openssl/lib/libssl.so.81.1.1 /lib64/libssl.so.1.1
+ln -sf /usr/local/openssl/lib/libcrypto.so.81.1.1 /lib64/libcrypto.so.1.1
 注意：不能直接删除软链接
 
 如需使用新版本开发，则需替换原来的软链接指向，即替换原动态库，进行版本升级。
 
 替换/lib(lib64)和/usr/lib(lib64)和/usr/local/lib(lib64)存在的相应动态库：
 
-ln -sf /usr/local/openssl/lib/libssl.so.81.1.1 /usr/lib64/libssl.so
-ln -sf /usr/local/openssl/lib/libcrypto.so.81.1.1 /usr/lib64/libcrypto.so
+ln -sf /usr/local/openssl/lib/libssl.so.81.1.1 /lib64/libssl.so
+ln -sf /usr/local/openssl/lib/libcrypto.so.81.1.1 /lib64/libcrypto.so
 
 
 

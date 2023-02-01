@@ -29,8 +29,7 @@
 
 		, cfgOpen/3					%% 注册配置 以提供相同配置策略的模块复用
 		, nativeCredentialFile/1
-%%
-%%
+
 		, connOpen/3            %% 建立连接
 		, connClose/1           %% 关闭连接
 %%
